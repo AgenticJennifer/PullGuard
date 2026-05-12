@@ -1,8 +1,8 @@
 # PullGuard
 
 PullGuard is an AI-powered PR quality classification and auto-triage system for GitHub.
-# PullGuard
 
+# PullGuard
 
 ![Status](https://img.shields.io/badge/status-beta-f59e0b)
 ![License](https://img.shields.io/badge/license-MIT-green)
