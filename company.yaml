@@ -1,0 +1,5 @@
+name: PullGuard
+codename: SlopGuard
+mission: Protect maintainer attention by triaging low-signal pull requests before humans waste review time.
+tagline: AI-Powered PR Quality Control
+stage: beta

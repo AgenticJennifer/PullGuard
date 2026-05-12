@@ -1,0 +1,9 @@
+score_ranges:
+  slop: [0, 40]
+  needs_review: [41, 70]
+  good: [71, 100]
+
+confidence:
+  minimum_for_label_only: 0.70
+  minimum_for_comment: 0.80
+  minimum_for_auto_close: 0.95

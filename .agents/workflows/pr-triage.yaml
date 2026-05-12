@@ -1,0 +1,6 @@
+name: pr-triage
+trigger:
+  events:
+    - pull_request.opened
+    - pull_request.synchronize
+    - pull_request.edited

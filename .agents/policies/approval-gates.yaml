@@ -1,0 +1,18 @@
+require_human_approval_for:
+  - enabling_auto_close
+  - closing_first_time_contributor_prs
+  - changing_repo_thresholds_globally
+  - deleting_comments
+
+always_allowed:
+  - read_pull_requests
+  - read_repository_metadata
+  - score_pr
+  - apply_non_destructive_labels
+  - draft_non-hostile_comments
+
+always_forbidden:
+  - merge_pull_requests
+  - push_code
+  - disable_branch_protection
+  - post_credentials_or_secrets
