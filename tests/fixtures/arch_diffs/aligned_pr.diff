@@ -1,0 +1,17 @@
+diff --git a/src/models/user.py b/src/models/user.py
+index abc..def 100644
+--- a/src/models/user.py
++++ b/src/models/user.py
+@@ -1,5 +1,12 @@
+ from pydantic import BaseModel
++from datetime import datetime
+
+ class User(BaseModel):
+     name: str
+     email: str
++
++
++class UserSession(BaseModel):
++    user_id: int
++    token: str
++    expires_at: datetime

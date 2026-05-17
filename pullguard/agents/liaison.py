@@ -19,14 +19,15 @@ class CommunityLiaison(BaseAgent):
             author=pr.author,
             slop_score=slop.score if slop else "N/A",
             slop_category=slop.category.value if slop else "N/A",
+            slop_confidence=slop.confidence if slop else "N/A",
             arch_score=architecture.score if architecture else "N/A",
+            arch_confidence=architecture.confidence if architecture else "N/A",
             slop_reasoning=slop.reasoning if slop else "(skipped)",
             arch_findings=self._format_findings(architecture),
             tone=self.config.community.tone,
         )
-        model = self._build_model()
-        response = await model.generate_content_async(prompt)
-        result = self._parse_response(response.text)
+        response = await self.client.complete(prompt, temperature=0.7)
+        result = self._parse_response(response)
         return CommentDraft(**result)
 
     def _format_findings(self, audit: ArchitectureAudit | None) -> str:

@@ -15,9 +15,8 @@ class SlopClassifier(BaseAgent):
             body=pr.body or "(no description)",
             files=files_text,
         )
-        model = self._build_model()
-        response = await model.generate_content_async(prompt)
-        result = self._parse_response(response.text)
+        response = await self.client.complete(prompt, temperature=0.3)
+        result = self._parse_response(response)
         return SlopAnalysis(**result)
 
     def _format_files(self, pr: PullRequest) -> str:
@@ -40,4 +39,6 @@ class SlopClassifier(BaseAgent):
             "reasoning": "Failed to parse LLM response",
             "signals": [],
             "red_flags": [],
+            "confidence": "low",
+            "confidence_reason": "Could not parse LLM output",
         }

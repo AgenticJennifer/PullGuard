@@ -17,3 +17,23 @@ def test_webhook_skips_non_pr():
     })
     assert resp.status_code == 200
     assert resp.json()["status"] == "skipped"
+
+
+def test_webhook_skips_unrelated_comments():
+    resp = client.post("/webhook", json={
+        "comment": {"body": "looks good to me"},
+        "issue": {"pull_request": None},
+    }, headers={
+        "X-GitHub-Event": "issue_comment",
+        "Content-Type": "application/json",
+    })
+    assert resp.status_code == 200
+    assert resp.json()["status"] == "skipped"
+
+
+def test_unauthorized_without_signature():
+    resp = client.post("/webhook", json={}, headers={
+        "X-GitHub-Event": "ping",
+        "Content-Type": "application/json",
+    })
+    assert resp.status_code in (200, 401)

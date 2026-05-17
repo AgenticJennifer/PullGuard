@@ -13,6 +13,11 @@ Evaluate:
 4. Could this change break existing functionality?
 5. Is there unnecessary complexity?
 
+When setting confidence:
+- "high" if you found clear architecture violations or strong alignment
+- "medium" if patterns are suggestive but not definitive
+- "low" if project docs are sparse or the diff touches unrelated areas
+
 Respond with JSON:
 {{
     "passed": true | false,
@@ -20,6 +25,8 @@ Respond with JSON:
     "findings": [
         {{"severity": "info" | "warning" | "error", "file": "path", "message": "description", "suggested_fix": "..."}}
     ],
-    "project_docs_used": ["<doc file>", ...]
+    "project_docs_used": ["<doc file>", ...],
+    "confidence": "<low|medium|high>",
+    "confidence_reason": "<one sentence explaining confidence level>"
 }}
 """

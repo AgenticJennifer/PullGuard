@@ -1,0 +1,24 @@
+diff --git a/src/database/repository.py b/src/database/repository.py
+index abc..def 100644
+--- a/src/database/repository.py
++++ b/src/database/repository.py
+@@ -1,5 +1,18 @@
+ from typing import List, Optional
++from src.ui.components import Button, Table  # UI component import in data layer
++import plotly.graph_objects as go  # visualization in data layer
++import pandas as pd
+
+ class UserRepository:
+     def find_by_id(self, user_id: int) -> Optional[dict]:
+-        return {"id": user_id, "name": "test"}
++        data = self._query(f"SELECT * FROM users WHERE id = {user_id}")
++        chart = go.Figure(data=go.Bar(y=[data["name"]]))
++        chart.show()
++        return data
++
++    def render_report(self, data: List[dict]) -> Table:
++        """Renders a full HTML report using UI components."""
++        table = Table(columns=["ID", "Name"])
++        for row in data:
++            table.add_row([row["id"], row["name"]])
++        return table

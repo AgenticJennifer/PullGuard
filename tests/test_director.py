@@ -3,28 +3,34 @@ from pullguard.config import PullGuardConfig
 from pullguard.director import Director
 
 
-def test_compute_score_both():
+def test_is_flagged_below_slop_threshold():
+    config = PullGuardConfig()
+    director = Director(config)
+    slop = SlopAnalysis(score=20, category=SlopCategory.LIKELY_SLOP, reasoning="bad")
+    arch = ArchitectureAudit(passed=True, score=90)
+    assert director._is_flagged(slop, arch) is True
+
+
+def test_is_flagged_below_arch_threshold():
     config = PullGuardConfig()
     director = Director(config)
     slop = SlopAnalysis(score=80, category=SlopCategory.REAL, reasoning="good")
-    arch = ArchitectureAudit(passed=True, score=90)
-    score = director._compute_score(slop, arch)
-    assert score == 85
+    arch = ArchitectureAudit(passed=False, score=30)
+    assert director._is_flagged(slop, arch) is True
 
 
-def test_compute_score_slop_only():
+def test_is_flagged_not_flagged():
     config = PullGuardConfig()
     director = Director(config)
-    slop = SlopAnalysis(score=60, category=SlopCategory.SUSPICIOUS, reasoning="meh")
-    score = director._compute_score(slop, None)
-    assert score == 60
+    slop = SlopAnalysis(score=80, category=SlopCategory.REAL, reasoning="good")
+    arch = ArchitectureAudit(passed=True, score=80)
+    assert director._is_flagged(slop, arch) is False
 
 
-def test_compute_score_none():
+def test_is_flagged_none():
     config = PullGuardConfig()
     director = Director(config)
-    score = director._compute_score(None, None)
-    assert score == 0
+    assert director._is_flagged(None, None) is False
 
 
 def test_director_init():

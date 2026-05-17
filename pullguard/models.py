@@ -38,6 +38,8 @@ class SlopAnalysis(BaseModel):
     reasoning: str
     signals: list[str] = []
     red_flags: list[str] = []
+    confidence: str = "medium"
+    confidence_reason: str = ""
 
 
 class ArchitectureFinding(BaseModel):
@@ -52,6 +54,8 @@ class ArchitectureAudit(BaseModel):
     score: int = Field(ge=0, le=100)
     findings: list[ArchitectureFinding] = []
     project_docs_used: list[str] = []
+    confidence: str = "medium"
+    confidence_reason: str = ""
 
 
 class InlineComment(BaseModel):
@@ -73,5 +77,5 @@ class AnalysisResult(BaseModel):
     slop: SlopAnalysis | None = None
     architecture: ArchitectureAudit | None = None
     comment: CommentDraft | None = None
-    overall_score: int = Field(default=0, ge=0, le=100)
+    flagged: bool = False
     error: str | None = None

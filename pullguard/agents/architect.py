@@ -15,9 +15,8 @@ class ArchitectureAuditor(BaseAgent):
             project_docs=project_docs,
             files=files_text,
         )
-        model = self._build_model()
-        response = await model.generate_content_async(prompt)
-        result = self._parse_response(response.text)
+        response = await self.client.complete(prompt, temperature=0.3)
+        result = self._parse_response(response)
         return ArchitectureAudit(**result)
 
     def _load_project_docs(self, repo_path: str) -> str:
@@ -49,4 +48,6 @@ class ArchitectureAuditor(BaseAgent):
         return {
             "passed": False, "score": 50, "findings": [],
             "project_docs_used": [],
+            "confidence": "low",
+            "confidence_reason": "Could not parse LLM output",
         }

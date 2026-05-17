@@ -27,5 +27,11 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Run tests
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Type check
+        run: uv run mypy pullguard/ || true
+
+      - name: Test
         run: uv run pytest tests/ -v --tb=short
