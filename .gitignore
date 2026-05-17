@@ -1,11 +1,5 @@
-node_modules/
-dist/
-build/
-coverage/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
 .env
-.env.*
-.DS_Store
-*.log
-sqlite.db
-*.sqlite
-*.sqlite3

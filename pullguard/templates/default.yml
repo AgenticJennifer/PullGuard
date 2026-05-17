@@ -1,0 +1,24 @@
+# PullGuard default config — in-repo at .github/pullguard.yml
+version: 1
+analysis:
+  min_score: 50
+  require_arch_audit: true
+  max_files_to_sample: 20
+llm:
+  model: "gemini-2.0-flash"
+  temperature: 0.3
+slop_classifier:
+  enabled: true
+  thresholds:
+    suspicious: 40
+    likely_slop: 25
+architect:
+  enabled: true
+  required_dirs:
+    - docs/
+    - ARCHITECTURE.md
+  max_context_files: 5
+community:
+  enabled: true
+  tone: "constructive"
+  mention_maintainer_on_score_below: 30
