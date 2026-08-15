@@ -1,0 +1,28 @@
+{
+  "action": "opened",
+  "number": 42,
+  "pull_request": {
+    "id": 1001,
+    "number": 42,
+    "title": "Add retry handling to payment client",
+    "body": "Adds bounded retries and structured logging around transient upstream errors.",
+    "state": "open",
+    "html_url": "https://github.com/example/widgets/pull/42",
+    "head": {
+      "ref": "feature/payment-retries",
+      "sha": "1111111111111111111111111111111111111111",
+      "repo": { "full_name": "example/widgets" }
+    },
+    "base": {
+      "ref": "main",
+      "sha": "0000000000000000000000000000000000000000",
+      "repo": { "full_name": "example/widgets" }
+    },
+    "user": { "login": "contributor-example" }
+  },
+  "repository": {
+    "full_name": "example/widgets",
+    "default_branch": "main"
+  },
+  "sender": { "login": "contributor-example" }
+}
